@@ -1,0 +1,92 @@
+<script lang="ts">
+	import * as menu from '@zag-js/menu';
+	import { portal, normalizeProps, useMachine } from '@zag-js/svelte';
+	import { setMenuContext } from './context.js';
+	import type { MenuProps } from './types.js';
+	import { fade } from 'svelte/transition';
+
+	// props
+	const {
+		// Base
+		base = '',
+		classes = '',
+		// Trigger
+		triggerBase = 'btn',
+		triggerBackground = '',
+		triggerClasses = '',
+		// Indicator
+		indicatorBase = '',
+		indicatorClasses = '',
+		// Positioner
+		positionerBase = '',
+		positionerClasses = '',
+		// Content
+		contentBase = 'flex flex-col',
+		contentBackground = 'bg-surface-50-950',
+		contentBorder = 'border',
+		contentBorderColor = 'border-surface-200-800',
+		contentPadding = 'py-1',
+		contentGap = '',
+		contentRounded = 'rounded-container',
+		contentWidth = '',
+		contentClasses = '',
+		// Snippets
+		children,
+		trigger,
+		indicator,
+		// Zag
+		...zagProps
+	}: MenuProps = $props();
+
+	// zag
+	const id = $props.id();
+	const service = useMachine(menu.machine, () => ({ id, ...zagProps }));
+	const api = $derived(menu.connect(service, normalizeProps));
+
+	// context
+	setMenuContext({
+		get api() {
+			return api;
+		},
+	});
+</script>
+
+<span class="{base} {classes}" data-testid="menu">
+	<button {...api.getTriggerProps()} class="{triggerBase} {triggerBackground} {triggerClasses}">
+		{@render trigger()}
+		<span {...api.getIndicatorProps()} class="{indicatorBase} {indicatorClasses}">
+			{#if indicator}{@render indicator()}{:else}
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="16"
+					height="16"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					style="opacity: 0.5"
+				>
+					<path d="m6 9 6 6 6-6" />
+				</svg>
+			{/if}
+		</span>
+	</button>
+
+	{#if api.open}
+		<div
+			use:portal
+			{...api.getPositionerProps()}
+			transition:fade={{ duration: 100 }}
+			class="{positionerBase} {positionerClasses}"
+		>
+			<ul
+				{...api.getContentProps()}
+				class="{contentBase} {contentBackground} {contentBorder} {contentBorderColor} {contentPadding} {contentGap} {contentRounded} {contentWidth} {contentClasses}"
+			>
+				{@render children()}
+			</ul>
+		</div>
+	{/if}
+</span>
