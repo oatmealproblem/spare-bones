@@ -8,11 +8,17 @@ export interface MenuContext {
 // Menu ---
 
 export interface MenuProps extends Omit<menu.Props, 'id'> {
+	/** Enable display of the popover arrow. */
+	arrow?: boolean;
+	/** Set z-index for the positioner. */
+	zIndex?: string;
+
 	// Base ---
 	/** Set base classes for the root element. */
 	base?: string;
 	/** Provide arbitrary classes for the root element. */
 	classes?: string;
+
 	// Trigger ---
 	/** Set base styles for the trigger. */
 	triggerBase?: string;
@@ -20,16 +26,19 @@ export interface MenuProps extends Omit<menu.Props, 'id'> {
 	triggerBackground?: string;
 	/** Provide arbitrary styles for the trigger. */
 	triggerClasses?: string;
+
 	// Indicator ---
 	/** Set base styles for the indicator. */
 	indicatorBase?: string;
 	/** Provide arbitrary styles for the indicator. */
 	indicatorClasses?: string;
+
 	// Positioner ---
 	/** Set base classes for the positioner. */
 	positionerBase?: string;
 	/** Provide arbitrary classes for the positioner. */
 	positionerClasses?: string;
+
 	// Content ---
 	/** Set base classes for the content. */
 	contentBase?: string;
@@ -49,6 +58,15 @@ export interface MenuProps extends Omit<menu.Props, 'id'> {
 	contentWidth?: string;
 	/** Provide arbitrary classes for the content. */
 	contentClasses?: string;
+
+	// Arrow ---
+	/** Set base classes for the arrow. */
+	arrowBase?: string;
+	/** Set background classes for the arrow. */
+	arrowBackground?: string;
+	/** Provide arbitrary classes for the arrow. */
+	arrowClasses?: string;
+
 	// Snippets ---
 	/** The default child slot. */
 	children: Snippet;

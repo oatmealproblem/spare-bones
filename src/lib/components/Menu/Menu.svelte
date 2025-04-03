@@ -7,6 +7,8 @@
 
 	// props
 	const {
+		arrow = false,
+		zIndex = 'auto',
 		// Base
 		base = '',
 		classes = '',
@@ -30,6 +32,10 @@
 		contentRounded = 'rounded-container',
 		contentWidth = '',
 		contentClasses = '',
+		// Arrow
+		arrowBase = '',
+		arrowBackground = '!bg-white',
+		arrowClasses = '',
 		// Snippets
 		children,
 		trigger,
@@ -81,12 +87,28 @@
 			transition:fade={{ duration: 100 }}
 			class="{positionerBase} {positionerClasses}"
 		>
+			{#if arrow}
+				<div {...api.getArrowProps()}>
+					<div
+						{...api.getArrowTipProps()}
+						class="{arrowBase} {arrowBackground} {arrowClasses}"
+					></div>
+				</div>
+			{/if}
 			<ul
 				{...api.getContentProps()}
 				class="{contentBase} {contentBackground} {contentBorder} {contentBorderColor} {contentPadding} {contentGap} {contentRounded} {contentWidth} {contentClasses}"
+				style="z-index: {zIndex};"
 			>
 				{@render children()}
 			</ul>
 		</div>
 	{/if}
 </span>
+
+<style>
+	:global([data-part='arrow']) {
+		--arrow-size: 10px;
+		--arrow-background: white;
+	}
+</style>
