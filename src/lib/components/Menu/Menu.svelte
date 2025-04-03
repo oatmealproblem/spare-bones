@@ -29,7 +29,7 @@
 		contentBorderColor = 'border-surface-200-800',
 		contentPadding = 'py-1',
 		contentGap = '',
-		contentRounded = 'rounded-container',
+		contentRounded = 'rounded-base',
 		contentWidth = '',
 		contentClasses = '',
 		// Arrow
