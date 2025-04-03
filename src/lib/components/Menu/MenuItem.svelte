@@ -4,10 +4,11 @@
 
 	let {
 		// Root
-		base = 'cursor-pointer w-full',
-		padding = 'px-2 py-1',
-		highlight = 'data-highlighted:preset-filled-surface-950-50',
-		classes = '',
+		base,
+		padding,
+		classes,
+		// State
+		stateHighlighted,
 		// Snippets
 		children,
 		// Zag
@@ -17,6 +18,10 @@
 	const context = getMenuContext();
 </script>
 
-<li {...context?.api.getItemProps(zagProps)} class="{base} {padding} {highlight} {classes}">
+<li
+	{...context?.api.getItemProps(zagProps)}
+	class="{base ?? context.itemBase} {padding ?? context.itemPadding} {stateHighlighted ??
+		context.stateHighlighted} {classes ?? context.itemClasses}"
+>
 	{@render children()}
 </li>

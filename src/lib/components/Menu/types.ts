@@ -1,7 +1,8 @@
 import * as menu from '@zag-js/menu';
 import type { Snippet } from 'svelte';
 
-export interface MenuContext {
+export interface MenuContext
+	extends Pick<MenuProps, 'itemBase' | 'itemPadding' | 'itemClasses' | 'stateHighlighted'> {
 	api: ReturnType<typeof menu.connect>;
 }
 
@@ -67,6 +68,18 @@ export interface MenuProps extends Omit<menu.Props, 'id'> {
 	/** Provide arbitrary classes for the arrow. */
 	arrowClasses?: string;
 
+	// Item ---
+	/** Set base classes for the item elements. Can be individually overridden with the `base` prop on the <Menu.Item> component. */
+	itemBase?: string;
+	/** Set padding classes for the item elements. Can be individually overridden with the `padding` prop on the <Menu.Item> component. */
+	itemPadding?: string;
+	/** Provide arbitrary classes for the item elements. Can be individually overridden with the `classes` prop on the <Menu.Item> component. */
+	itemClasses?: string;
+
+	// State ---
+	/** Set highlight classes for the item elements. These classes should start with the `data-highlighted:` variant. Can be individually overridden with the `stateHighlighted` prop on the <Menu.Item> component. */
+	stateHighlighted?: string;
+
 	// Snippets ---
 	/** The default child slot. */
 	children: Snippet;
@@ -80,14 +93,17 @@ export interface MenuProps extends Omit<menu.Props, 'id'> {
 
 export interface MenuItemProps extends menu.ItemProps {
 	// Base ---
-	/** Set base classes for the root element. */
+	/** Set base classes for the root element. Defaults to the `itemBase` prop of the parent <Menu> component. */
 	base?: string;
-	/** Set padding classes for the root element. */
+	/** Set padding classes for the root element. Defaults to the `itemPadding` prop of the parent <Menu> component. */
 	padding?: string;
-	/** Set highlight classes for the root element. */
-	highlight?: string;
-	/** Provide arbitrary classes for the root element. */
+	/** Provide arbitrary classes for the root element. Defaults to the `itemClasses` prop of the parent <Menu> component. */
 	classes?: string;
+
+	// State ---
+	/** Set highlight classes for the root element. These classes should start with the `data-highlighted:` variant. Defaults to the `stateHighlighted` prop of the parent <Menu> component. */
+	stateHighlighted?: string;
+
 	// Snippets ---
 	/** The default child slot. */
 	children: Snippet;

@@ -36,6 +36,12 @@
 		arrowBase = '',
 		arrowBackground = '!bg-white',
 		arrowClasses = '',
+		// Item
+		itemBase = 'cursor-pointer w-full',
+		itemPadding = 'px-2 py-1',
+		itemClasses = '',
+		// State
+		stateHighlighted = 'data-highlighted:preset-filled',
 		// Snippets
 		children,
 		trigger,
@@ -53,6 +59,18 @@
 	setMenuContext({
 		get api() {
 			return api;
+		},
+		get itemBase() {
+			return itemBase;
+		},
+		get itemPadding() {
+			return itemPadding;
+		},
+		get itemClasses() {
+			return itemClasses;
+		},
+		get stateHighlighted() {
+			return stateHighlighted;
 		},
 	});
 </script>
