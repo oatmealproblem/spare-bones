@@ -7,7 +7,7 @@ Additional Svelte components to use with [Skeleton](https://skeleton.dev), power
 Install with `npm install spare-bones`, then add package's dist folder as a Tailwind source:
 
 ```css
-@source @source '../node_modules/spare-bones/dist';
+@source '../node_modules/spare-bones/dist';
 ```
 
 Adjust the path as needed for your project structure. [See the Tailwind documentation](https://tailwindcss.com/docs/detecting-classes-in-source-files#explicitly-registering-sources) for more info.
